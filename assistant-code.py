@@ -1,12 +1,10 @@
 from bs4 import BeautifulSoup as Soup
-from langchain_community.document_loaders.recursive_url_loader import RecursiveUrlLoader
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.pydantic_v1 import BaseModel, Field
-from langchain_anthropic import ChatAnthropic
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.pydantic_v1 import BaseModel, Field
 from dotenv import load_dotenv
+from langchain_anthropic import ChatAnthropic
+from langchain_community.document_loaders.recursive_url_loader import RecursiveUrlLoader
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_openai import ChatOpenAI
 
 load_dotenv()
 # LCEL docs
@@ -22,11 +20,11 @@ d_reversed = list(reversed(d_sorted))
 concatenated_content = "\n\n\n --- \n\n\n".join(
     [doc.page_content for doc in d_reversed]
 )
-
+print(f"Retrieving content from URL {url} to create a context (concatenated_content) for the chatbot...\n")
 ### OpenAI
 
 # Grader prompt
-code_gen_prompt = ChatPromptTemplate.from_messages(
+code_gen_prompt_openAI = ChatPromptTemplate.from_messages(
     [
         (
             "system",
@@ -52,17 +50,22 @@ class code(BaseModel):
 
 
 expt_llm = "gpt-4-0125-preview"
+print(f"Using expt_llm {expt_llm}\n")
 llm = ChatOpenAI(temperature=0, model=expt_llm)
 # code_gen_chain = code_gen_prompt | llm.with_structured_output(code)
 # with_structured_output(code) not implemented
-code_gen_chain_oai = code_gen_prompt
+code_gen_chain_oai = code_gen_prompt_openAI
 
 question = "How do I build a RAG chain in LCEL?"
 solution = code_gen_chain_oai.invoke(
     {"context": concatenated_content, "messages": [("user", question)]}
 )
+print(f"question is {question}\n")
+for message in solution.messages:
+    # Realiza alguna operación con cada elemento de la lista
+    print(message.content)
 
-print(solution.messages)
+
 ### Anthropic
 
 # Prompt to enforce tool use
@@ -94,6 +97,9 @@ class code(BaseModel):
 # LLM
 # expt_llm = "claude-3-haiku-20240307"
 expt_llm = "claude-3-opus-20240229"
+print("\n")
+print(f"Using Anthropic {expt_llm}")
+
 llm = ChatAnthropic(
     model=expt_llm,
     default_headers={"anthropic-beta": "tools-2024-04-04"},
@@ -170,11 +176,15 @@ def parse_output(solution):
 code_gen_chain = code_gen_chain_re_try | parse_output
 
 # No re-try
-code_gen_chain = code_gen_prompt_claude | structured_llm_claude | parse_output
+code_gen_chain_no_retry = code_gen_prompt_claude | structured_llm_claude | parse_output
 
 # Test
 question = "How do I build a RAG chain in LCEL?"
-solution = code_gen_chain.invoke(
+print(f"question is {question}\n")
+print("Waiting to Claude...\n")
+solution = code_gen_chain_no_retry.invoke(
     {"context": concatenated_content, "messages": [("user", question)]}
 )
-print(solution)
+print(f"prefix: \n\n{solution.prefix}\n")
+print(f"imports: \n\n{solution.imports}\n")
+print(f"solution code: \n\n{solution.code}\n")

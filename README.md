@@ -1,5 +1,6 @@
 Working with langchain and langGraph...
 
+
 ```
 create a .env file with this entries:
 
@@ -9,10 +10,20 @@ LANGSMITH_API_KEY=
 
 ```
 
+# Created  a voice-pdf-reader-refactored.py script able to read url of a pdf or files and return a voice version of it.
+
 ```
     poetry shell
     poetry update
-    poetry run langGraph_intro.py
+    poetry run python voice-pdf-reader-refactored.py
+```
+
+# Created a chat with Claude based on langGraph
+
+```
+    poetry shell
+    poetry update
+    poetry run python langGraph_intro.py
 ```
 This is an output with Claude:
 
