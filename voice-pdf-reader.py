@@ -13,6 +13,7 @@ def speak(text):
     """Función para convertir texto a voz usando el comando `say` de macOS."""
     subprocess.run(["say", text])
 
+
 def download_pdf(url):
     """Descarga un archivo PDF desde una URL."""
     response = requests.get(url)

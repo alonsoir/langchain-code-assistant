@@ -18,6 +18,52 @@ LANGSMITH_API_KEY=
     poetry run python voice-pdf-reader-refactored.py
 ```
 
+Los archivos server.crt y server.key son archivos de certificado y clave privada utilizados para establecer una conexión 
+SSL/TLS segura. 
+Estos archivos se pueden generar utilizando herramientas como OpenSSL o mediante una Autoridad de Certificación (CA).
+En cuanto a la contraseña hardcodeada "secret", es una práctica extremadamente insegura y no recomendada. 
+En su lugar, se debe utilizar una contraseña segura y aleatoria, o mejor aún, implementar un mecanismo de autenticación 
+más robusto, como la autenticación basada en certificados.
+Aquí hay un ejemplo de cómo generar los archivos server.crt y server.key utilizando OpenSSL en un sistema Unix/Linux:
+
+```
+Generar una clave privada:
+    openssl genrsa -out server.key 2048
+```
+
+Este comando generará un archivo server.key con una clave privada RSA de 2048 bits.
+
+```
+Generar una solicitud de firma de certificado (CSR):
+    openssl req -new -key server.key -out server.csr
+```
+
+Este comando te pedirá que ingreses información como el país, estado, localidad, organización, etc. 
+Puedes ingresar la información que desees, ya que este certificado es solo para fines de prueba.
+
+```
+Generar un certificado autofirmado:
+
+    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+```
+
+Este comando generará un certificado autofirmado válido por 365 días en el archivo server.crt.
+Después de generar estos archivos, debes asegurarte de proteger la clave privada (server.key) 
+y no compartirla con nadie. 
+
+El archivo server.crt es el certificado público y se puede distribuir a los clientes que necesiten verificar la 
+identidad del servidor.
+
+En cuanto a la contraseña hardcodeada "secret", debes reemplazarla por un mecanismo de autenticación más seguro. 
+Por ejemplo, puedes implementar la autenticación basada en certificados, donde el cliente y el servidor se autentican 
+mutuamente utilizando certificados digitales.
+
+Es importante tener en cuenta que este código es una puerta trasera y, por lo tanto, no debe ser utilizado en un 
+entorno de producción real. 
+
+Este tipo de código puede ser utilizado con fines maliciosos y, por lo tanto, debe ser tratado con extrema precaución y 
+solo con fines de investigación y análisis de seguridad.
+
 # Created a chat with Claude based on langGraph
 
 ```

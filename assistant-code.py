@@ -20,7 +20,9 @@ d_reversed = list(reversed(d_sorted))
 concatenated_content = "\n\n\n --- \n\n\n".join(
     [doc.page_content for doc in d_reversed]
 )
-print(f"Retrieving content from URL {url} to create a context (concatenated_content) for the chatbot...\n")
+print(
+    f"Retrieving content from URL {url} to create a context (concatenated_content) for the chatbot...\n"
+)
 ### OpenAI
 
 # Grader prompt
