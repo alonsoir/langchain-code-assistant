@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af71cb6a-07a6-4a0b-8fb7-77b1b144c84a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +55,7 @@
     "Python.backdoor_multiple_ports.executor": "Run",
     "Python.langGraph_intro.executor": "Run",
     "Python.refactored_assistant.executor": "Run",
+    "Python.voice-pdf-reader-refactored.executor": "Run",
     "Python.voice-pdf-reader.executor": "Run",
     "Python.voice-pdf-reeder-refactored.executor": "Run",
     "RunOnceActivity.CodyAccountHistoryMigration": "true",

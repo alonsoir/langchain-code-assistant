@@ -1,5 +1,4 @@
-Working with langchain and langGraph...
-
+Working with langchain, langGraph...
 
 ```
 create a .env file with this entries:
@@ -17,6 +16,15 @@ LANGSMITH_API_KEY=
     poetry update
     poetry run python voice-pdf-reader-refactored.py
 ```
+DISCLAIMER
+
+Los backdoor están ahí como ejemplo y no deben ser utilizados en un entorno de producción real. 
+El autor no se responsabiliza del mal uso que puedan hacerse de ellos.
+
+Simplemente, estúdialos, trata de crear las contramedidas adecuadas en tus sistemas de producción, ejecutalos en 
+un entorno de pruebas seguro, pero no trates de crear un backdoor con ellos, mucho menos contra mí. 
+
+Me enteraría de cualquier uso que pueda hacerse de ellos.
 
 Los archivos server.crt y server.key son archivos de certificado y clave privada utilizados para establecer una conexión 
 SSL/TLS segura. 
