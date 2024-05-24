@@ -1,4 +1,5 @@
-Working with langchain, langGraph...
+Working with langchain and langGraph...
+
 
 ```
 create a .env file with this entries:
@@ -7,6 +8,13 @@ ANTHROPIC_API_KEY=
 
 LANGSMITH_API_KEY=
 
+OPENAI_API_KEY=
+
+LANGCHAIN_API_KEY=
+
+TAVILY_API_KEY=
+
+In my case, LANGSMITH_API_KEY and LANGCHAIN_API_KEY are the same key. Maybe it will change in the future...
 ```
 
 # Created  a voice-pdf-reader-refactored.py script able to read url of a pdf or files and return a voice version of it.
@@ -16,61 +24,14 @@ LANGSMITH_API_KEY=
     poetry update
     poetry run python voice-pdf-reader-refactored.py
 ```
-DISCLAIMER
-
-Los backdoor están ahí como ejemplo y no deben ser utilizados en un entorno de producción real. 
-El autor no se responsabiliza del mal uso que puedan hacerse de ellos.
-
-Simplemente, estúdialos, trata de crear las contramedidas adecuadas en tus sistemas de producción, ejecutalos en 
-un entorno de pruebas seguro, pero no trates de crear un backdoor con ellos, mucho menos contra mí. 
-
-Me enteraría de cualquier uso que pueda hacerse de ellos.
-
-Los archivos server.crt y server.key son archivos de certificado y clave privada utilizados para establecer una conexión 
-SSL/TLS segura. 
-Estos archivos se pueden generar utilizando herramientas como OpenSSL o mediante una Autoridad de Certificación (CA).
-En cuanto a la contraseña hardcodeada "secret", es una práctica extremadamente insegura y no recomendada. 
-En su lugar, se debe utilizar una contraseña segura y aleatoria, o mejor aún, implementar un mecanismo de autenticación 
-más robusto, como la autenticación basada en certificados.
-Aquí hay un ejemplo de cómo generar los archivos server.crt y server.key utilizando OpenSSL en un sistema Unix/Linux:
+# Created a multi-agent-collaborator. There are two another versions related with how i parse the json responses from 
+# langchain and langGraph. It is a mess, because there are not well formed json messages...
 
 ```
-Generar una clave privada:
-    openssl genrsa -out server.key 2048
+    poetry shell
+    poetry update
+    poetry run python multi-agent-collaborator.py
 ```
-
-Este comando generará un archivo server.key con una clave privada RSA de 2048 bits.
-
-```
-Generar una solicitud de firma de certificado (CSR):
-    openssl req -new -key server.key -out server.csr
-```
-
-Este comando te pedirá que ingreses información como el país, estado, localidad, organización, etc. 
-Puedes ingresar la información que desees, ya que este certificado es solo para fines de prueba.
-
-```
-Generar un certificado autofirmado:
-
-    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-```
-
-Este comando generará un certificado autofirmado válido por 365 días en el archivo server.crt.
-Después de generar estos archivos, debes asegurarte de proteger la clave privada (server.key) 
-y no compartirla con nadie. 
-
-El archivo server.crt es el certificado público y se puede distribuir a los clientes que necesiten verificar la 
-identidad del servidor.
-
-En cuanto a la contraseña hardcodeada "secret", debes reemplazarla por un mecanismo de autenticación más seguro. 
-Por ejemplo, puedes implementar la autenticación basada en certificados, donde el cliente y el servidor se autentican 
-mutuamente utilizando certificados digitales.
-
-Es importante tener en cuenta que este código es una puerta trasera y, por lo tanto, no debe ser utilizado en un 
-entorno de producción real. 
-
-Este tipo de código puede ser utilizado con fines maliciosos y, por lo tanto, debe ser tratado con extrema precaución y 
-solo con fines de investigación y análisis de seguridad.
 
 # Created a chat with Claude based on langGraph
 
