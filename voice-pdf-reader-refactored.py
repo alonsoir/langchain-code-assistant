@@ -26,11 +26,11 @@ def download_pdf(url):
 # Al tratar de refactorizar el código, me di cuenta que la variable pdf_reader al abrir un fichero local
 # se cerraba, aunque hayas usado el metodo open() para abrir el fichero.
 def read_pdf(source):
-    '''
+    """
 
     :param source: source es un recurso que puede ser una URL o un nombre de fichero local
     :return: nada, el sistema usa la voz al para los sordomudos.
-    '''
+    """
     try:
         # Leer el PDF desde una URL remota
         pdf_data = download_pdf(source)

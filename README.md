@@ -8,6 +8,13 @@ ANTHROPIC_API_KEY=
 
 LANGSMITH_API_KEY=
 
+OPENAI_API_KEY=
+
+LANGCHAIN_API_KEY=
+
+TAVILY_API_KEY=
+
+In my case, LANGSMITH_API_KEY and LANGCHAIN_API_KEY are the same key. Maybe it will change in the future...
 ```
 
 # Created  a voice-pdf-reader-refactored.py script able to read url of a pdf or files and return a voice version of it.
@@ -16,6 +23,14 @@ LANGSMITH_API_KEY=
     poetry shell
     poetry update
     poetry run python voice-pdf-reader-refactored.py
+```
+# Created a multi-agent-collaborator. There are two another versions related with how i parse the json responses from 
+# langchain and langGraph. It is a mess, because there are not well formed json messages...
+
+```
+    poetry shell
+    poetry update
+    poetry run python multi-agent-collaborator.py
 ```
 
 # Created a chat with Claude based on langGraph
